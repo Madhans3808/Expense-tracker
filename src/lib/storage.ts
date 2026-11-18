@@ -1,7 +1,7 @@
 import { CategoryBudget, Expense } from '@/types';
 import { DEFAULT_BUDGETS, INITIAL_EXPENSES } from './constants';
 
-const EXPENSES_KEY = 'et_expenses_v1';
+const EXPENSES_KEY = 'et_expenses_v2';
 const BUDGETS_KEY = 'et_budgets_v1';
 const CURRENCY_KEY = 'et_currency_v1';
 
@@ -9,11 +9,13 @@ export const storage = {
   getExpenses: (): Expense[] => {
     if (typeof window === 'undefined') return [];
     try {
+      // Clear any legacy demo data from v1
+      localStorage.removeItem('et_expenses_v1');
+
       const data = localStorage.getItem(EXPENSES_KEY);
       if (!data) {
-        // Initialize with default demo data
-        localStorage.setItem(EXPENSES_KEY, JSON.stringify(INITIAL_EXPENSES));
-        return INITIAL_EXPENSES;
+        localStorage.setItem(EXPENSES_KEY, JSON.stringify([]));
+        return [];
       }
       return JSON.parse(data);
     } catch (e) {
