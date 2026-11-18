@@ -12,6 +12,7 @@ import { ExpenseList } from '@/components/ExpenseList';
 import { ExpenseModal } from '@/components/ExpenseModal';
 import { EditBudgetModal } from '@/components/EditBudgetModal';
 import { ExportImportModal } from '@/components/ExportImportModal';
+import { MobileNav } from '@/components/MobileNav';
 import { Plus } from 'lucide-react';
 
 export default function Home() {
@@ -163,7 +164,7 @@ export default function Home() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-4 sm:space-y-6 pb-24 sm:pb-8">
         {/* Top Summary Cards */}
         <OverviewCards
           totalSpent={monthlySpent}
@@ -173,7 +174,7 @@ export default function Home() {
         />
 
         {/* Middle Section: Budget Tracker & Category Breakdown */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
           <div className="lg:col-span-2">
             <BudgetManager
               budgets={budgets}
@@ -200,14 +201,12 @@ export default function Home() {
         />
       </main>
 
-      {/* Floating Add Expense Button for Mobile */}
-      <button
-        onClick={handleOpenAddExpense}
-        className="fixed bottom-6 right-6 sm:hidden z-40 w-14 h-14 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white shadow-xl flex items-center justify-center transform active:scale-95 transition-all"
-        aria-label="Add Expense"
-      >
-        <Plus className="w-6 h-6" />
-      </button>
+      {/* Modern Mobile Bottom Navigation Bar */}
+      <MobileNav
+        onOpenAddExpense={handleOpenAddExpense}
+        onOpenBudgetsModal={() => setIsBudgetModalOpen(true)}
+        onOpenBackupModal={() => setIsBackupModalOpen(true)}
+      />
 
       {/* Add / Edit Expense Modal */}
       <ExpenseModal

@@ -1,9 +1,22 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Expense Tracker | Budget & Spending Manager",
   description: "Track your expenses, manage budgets, and take control of your personal finances with real-time local storage.",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "ExpensePulse",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: "#0b0f19",
 };
 
 export default function RootLayout({
